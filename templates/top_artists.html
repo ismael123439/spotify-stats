@@ -41,8 +41,9 @@
         <p>No se encontraron artistas.</p>
         {% endif %}
 
-        <div class="volver">
-            <a href="/" class="back-btn">Volver al menú</a>
+        <div style="text-align: center; margin-top: 20px;">
+            <a href="/" class="back-btn">Volver al menu</a>
+            <a href="{{ url_for('top_tracks') }}" class="back-btn">Ver Canciones</a>
         </div>
     </div>
 </body>
