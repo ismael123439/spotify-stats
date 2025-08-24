@@ -51,9 +51,10 @@
         <p>No se encontraron artistas.</p>
         {% endif %}
 
-        <div class="volver">
-            <a href="/">Volver a login</a>
-        </div>
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" class="back-btn">Volver al menu</a>
+        <a href="{{ url_for('about') }}" class="back-btn">Ver artistas</a>
+    </div>
     </div>
 </body>
 
