@@ -17,16 +17,6 @@ Esta aplicación web te permite ver tus artistas más escuchados en Spotify. Est
 
 ---
 
-## 🖼 Capturas
-
-![Pantalla de login](screenshots/index.png)  
-*Pantalla de inicio y login con Spotify*
-
-![Top artistas](screenshots/top_artists.png)  
-*Lista de tus artistas más escuchados*
-
----
-
 ## ⚙️ Requisitos
 
 - Python 3.10+
