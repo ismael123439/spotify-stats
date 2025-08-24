@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Top Artistas</title>
-   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body>
     <div class="container">
         <h1>Tus Top Artistas</h1>
@@ -13,9 +15,12 @@
         <form method="get" action="{{ url_for('top_artists') }}" style="margin-bottom: 20px; text-align:center;">
             <label for="time_range">Ver artistas de:</label>
             <select name="time_range" id="time_range" onchange="this.form.submit()">
-                <option value="short_term" {% if selected_range=='short_term' %}selected{% endif %}>Última semana</option>
-                <option value="medium_term" {% if selected_range=='medium_term' %}selected{% endif %}>Últimos 6 meses</option>
-                <option value="long_term" {% if selected_range=='long_term' %}selected{% endif %}>Todos los años</option>
+                <option value="short_term" {% if selected_range=='short_term' %}selected{% endif %}>Última semana
+                </option>
+                <option value="medium_term" {% if selected_range=='medium_term' %}selected{% endif %}>Últimos 6 meses
+                </option>
+                <option value="long_term" {% if selected_range=='long_term' %}selected{% endif %}>Todos los años
+                </option>
             </select>
         </form>
 
@@ -46,7 +51,10 @@
         <p>No se encontraron artistas.</p>
         {% endif %}
 
-        <a href="/">Volver a login</a>
+        <div class="volver">
+            <a href="/">Volver a login</a>
+        </div>
     </div>
 </body>
+
 </html>

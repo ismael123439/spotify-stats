@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tus canciones más escuchadas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+<div class="container">
+    <h1>🎶 Tus canciones más escuchadas</h1>
+
+    <form method="get" action="{{ url_for('top_tracks') }}">
+        <label for="time_range">Selecciona el rango de tiempo:</label>
+        <select name="time_range" id="time_range" onchange="this.form.submit()">
+            <option value="short_term" {% if selected_range == 'short_term' %}selected{% endif %}>Últimas 4 semanas</option>
+            <option value="medium_term" {% if selected_range == 'medium_term' %}selected{% endif %}>Últimos 6 meses</option>
+            <option value="long_term" {% if selected_range == 'long_term' %}selected{% endif %}>Todo el historial</option>
+        </select>
+    </form>
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Portada</th>
+            <th>Canción</th>
+            <th>Artista(s)</th>
+            <th>Link</th>
+        </tr>
+        {% for track in canciones %}
+        <tr>
+            <td>{{ loop.index }}</td>
+            <td>
+                {% if track.image %}
+                    <img src="{{ track.image }}" alt="Portada de {{ track.name }}">
+                {% endif %}
+            </td>
+            <td>{{ track.name }}</td>
+            <td>{{ track.artists }}</td>
+            <td><a href="{{ track.url }}" target="_blank">Escuchar</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="/" class="back-btn">Volver al login</a>
+        <a href="{{ url_for('top_artists') }}" class="back-btn">Ver artistas</a>
+    </div>
+</div>
+</body>
+</html>
