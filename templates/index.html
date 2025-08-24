@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Spotify Login</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
+
 <body class="login">
     <div class="container">
         <h1>Bienvenido a Spotify Stats</h1>
         <a href="{{ url_for('login') }}" class="btn">Ir a artistas</a>
-        
+
         <!-- Nuevo botón -->
         <a href="{{ url_for('about') }}" class="btn">Ir a canciones</a>
     </div>
 </body>
+
 </html>

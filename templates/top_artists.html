@@ -25,36 +25,25 @@
         </form>
 
         {% if artistas %}
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Artista</th>
-                    <th>Imagen</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for artist in artistas %}
-                <tr>
-                    <td>{{ loop.index }}</td>
-                    <td><a href="{{ artist['url'] }}" target="_blank">{{ artist['name'] }}</a></td>
-                    <td>
-                        {% if artist['image'] %}
-                        <img src="{{ artist['image'] }}" alt="{{ artist['name'] }}" width="50">
-                        {% endif %}
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+<div class="artists-container">
+    {% for artist in artistas %}
+    <div class="artist-card">
+        {% if artist.image %}
+        <img src="{{ artist.image }}" alt="{{ artist.name }}">
+        {% endif %}
+        <div class="rank-number">{{ loop.index }}</div>
+        <a href="{{ artist.url }}" target="_blank">{{ artist.name }}</a>
+    </div>
+    {% endfor %}          
+</div>
+
         {% else %}
         <p>No se encontraron artistas.</p>
         {% endif %}
 
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="/" class="back-btn">Volver al menu</a>
-        <a href="{{ url_for('about') }}" class="back-btn">Ver artistas</a>
-    </div>
+        <div class="volver">
+            <a href="/" class="back-btn">Volver al menú</a>
+        </div>
     </div>
 </body>
 

@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 app = Flask(__name__)
 app.secret_key = "SML64536a"
 
-MAX_ITEMS = 10  # máximo de artistas/canciones a mostrar
+MAX_ITEMS = 15  # máximo de artistas/canciones a mostrar
 
 load_dotenv()
 
