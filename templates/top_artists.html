@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Top Artistas</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Tus Top Artistas</h1>
+        {% if artistas %}
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Artista</th>
+                    <th>Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for artist in artistas %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td><a href="{{ artist['url'] }}" target="_blank">{{ artist['name'] }}</a></td>
+                    <td>
+                        {% if artist['image'] %}
+                        <img src="{{ artist['image'] }}" alt="{{ artist['name'] }}" width="50">
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No se encontraron artistas.</p>
+        {% endif %}
+        <a href="/">🔄 Volver a login</a>
+    </div>
+</body>
+</html>
