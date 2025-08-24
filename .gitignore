@@ -1,0 +1,5 @@
+# Entornos y configuraciones sensibles
+.env
+__pycache__/
+*.pyc
+instance/
