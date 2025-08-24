@@ -3,56 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Spotify Login</title>
-    <style>
-        /* Reset básico */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #1DB954, #191414);
-            color: #fff;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
-        }
-
-        a.login-btn {
-            display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            color: #1DB954;
-            background: #fff;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-        }
-
-        a.login-btn:hover {
-            background: #1ed760;
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0,0,0,0.4);
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <div>
+    <div class="container">
         <h1>Bienvenido a Spotify Stats</h1>
-        <a class="login-btn" href="{{ url_for('login') }}">Iniciar sesión con Spotify</a>
+        <a href="{{ url_for('login') }}">Iniciar sesión con Spotify (puede usar Google)</a>
     </div>
 </body>
 </html>

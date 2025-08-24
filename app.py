@@ -1,14 +1,14 @@
 from flask import Flask, redirect, request, session, url_for, render_template
 import requests
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 app.secret_key = "SML64536a"
 
-maxartist = 20   #miaximo de 50
+MAX_ARTISTS = 10  # máximo de artistas a mostrar
 
-load_dotenv()  # Carga las variables del .env
+load_dotenv()
 
 CLIENT_ID = os.getenv("SPOTIFY_CLIENT_ID")
 CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
@@ -54,25 +54,29 @@ def top_artists():
     if not token:
         return redirect(url_for("login"))
 
+    # Obtener time_range desde query string, default medium_term
+    time_range = request.args.get("time_range", "medium_term")
+
     headers = {"Authorization": f"Bearer {token}"}
-    response = requests.get(SPOTIFY_API_URL, headers=headers, params={"limit": maxartist})
+    response = requests.get(
+        "https://api.spotify.com/v1/me/top/artists",
+        headers=headers,
+        params={"limit": 10, "time_range": time_range}
+    )
 
     if response.status_code != 200:
         return f"Error: {response.json()}"
 
     data = response.json()
-    artistas = []
-    for artist in data["items"]:
-        artistas.append({
+    artistas = [
+        {
             "name": artist["name"],
             "url": artist["external_urls"]["spotify"],
             "image": artist["images"][0]["url"] if artist["images"] else None
-        })
+        }
+        for artist in data["items"]
+    ]
 
-    if not artistas:
-        return "No se encontraron artistas."
-
-    return render_template("top_artists.html", artistas=artistas)
-
+    return render_template("top_artists.html", artistas=artistas, selected_range=time_range)
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

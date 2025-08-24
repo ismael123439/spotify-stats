@@ -7,7 +7,18 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎵 Tus Top Artistas</h1>
+        <h1>Tus Top Artistas</h1>
+
+        <!-- Selector de rango de tiempo -->
+        <form method="get" action="{{ url_for('top_artists') }}" style="margin-bottom: 20px; text-align:center;">
+            <label for="time_range">Ver artistas de:</label>
+            <select name="time_range" id="time_range" onchange="this.form.submit()">
+                <option value="short_term" {% if selected_range=='short_term' %}selected{% endif %}>Última semana</option>
+                <option value="medium_term" {% if selected_range=='medium_term' %}selected{% endif %}>Últimos 6 meses</option>
+                <option value="long_term" {% if selected_range=='long_term' %}selected{% endif %}>Todos los años</option>
+            </select>
+        </form>
+
         {% if artistas %}
         <table>
             <thead>
@@ -34,7 +45,8 @@
         {% else %}
         <p>No se encontraron artistas.</p>
         {% endif %}
-        <a href="/">🔄 Volver a login</a>
+
+        <a href="/">Volver a login</a>
     </div>
 </body>
 </html>
