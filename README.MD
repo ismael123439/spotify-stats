@@ -1,132 +1,165 @@
-# Spotify Stats
+# 🎵 Spotify Stats
 
-App web en **Flask** para ver tus **artistas** y **canciones** más escuchadas usando la API de Spotify (OAuth2).
+A Flask web application to view your most listened artists and songs using the Spotify Web API with OAuth2 authentication.
 
----
+## ✨ Features
 
-## Requisitos
+- 🔐 OAuth2 authentication with Spotify
+- 🎤 View your top artists across different time periods
+- 🎵 View your top tracks across different time periods
+- 📊 Interactive data visualization with Plotly
+- 📱 Responsive web interface
+- ⏰ Multiple time ranges: short-term, medium-term, and long-term
+
+## 🛠️ Prerequisites
 
 - Python 3.10+
-- Cuenta en [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/)
+- A Spotify account
+- Spotify Developer Dashboard account
 
----
+## 📦 Installation
 
-## Instalación
-
+### 1. Clone the repository
 ```bash
-git clone https://github.com/tu-usuario/spotify-stats.git
+git clone https://github.com/ismael123439/spotify-stats.git
 cd spotify-stats
+```
 
+### 2. Create and activate virtual environment
+```bash
 python -m venv venv
-# Linux/Mac
+
+# On Linux/Mac
 source venv/bin/activate
-# Windows
+
+# On Windows
 venv\Scripts\activate
+```
 
+### 3. Install dependencies
+```bash
 pip install -r requirements.txt
-requirements.txt (el tuyo):
+```
 
-ini
-Copiar
-Editar
+## ⚙️ Configuration
+
+### 1. Spotify Developer Setup
+
+1. Go to [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/)
+2. Create a new app
+3. Copy your **Client ID** and **Client Secret**
+4. Add the following Redirect URIs to your app settings:
+   - `http://127.0.0.1:5000/callback`
+   - `http://localhost:5000/callback`
+
+### 2. Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
+SPOTIFY_CLIENT_ID=your_client_id_here
+SPOTIFY_CLIENT_SECRET=your_client_secret_here
+REDIRECT_URI=http://127.0.0.1:5000/callback
+```
+
+⚠️ **Important**: Never commit the `.env` file to your repository!
+
+## 🚀 Usage
+
+### Start the application
+```bash
+python app.py
+```
+
+### Open in browser
+Navigate to: `http://127.0.0.1:5000`
+
+## 📍 API Endpoints
+
+| Endpoint | Description | Parameters |
+|----------|-------------|------------|
+| `/` | Home page with login button | - |
+| `/login` | Redirects to Spotify authorization | - |
+| `/callback` | Handles OAuth callback and stores token | - |
+| `/top-artists` | Shows top artists | `time_range` |
+| `/top-tracks` | Shows top tracks | `time_range` |
+
+### Time Range Options
+
+- `short_term` - Last 4 weeks
+- `medium_term` - Last 6 months  
+- `long_term` - All time (years of data)
+
+### Example URLs
+```
+/top-artists?time_range=short_term
+/top-tracks?time_range=long_term
+```
+
+## 📁 Project Structure
+
+```
+spotify-stats/
+├── app.py                 # Main Flask application
+├── requirements.txt       # Python dependencies
+├── .env                  # Environment variables (don't commit!)
+├── README.md            # Project documentation
+├── static/
+│   └── css/
+│       └── styles.css   # CSS styles
+└── templates/
+    ├── index.html       # Home page template
+    ├── top_artists.html # Top artists page
+    └── top_tracks.html  # Top tracks page
+```
+
+## 📋 Dependencies
+
+```txt
 Flask==2.3.3
 requests==2.32.0
 spotipy==2.25.1
 python-dotenv==1.0.0
 plotly==5.18.0
-Configuración en Spotify
-Entra a Spotify Developer Dashboard y crea una app.
+```
 
-Copiá Client ID y Client Secret.
+## 🔧 Troubleshooting
 
-Agregá Redirect URIs (podés poner varias):
+### Common Issues
 
-http://127.0.0.1:5000/callback
+**`redirect_uri_mismatch` error**
+- Ensure the `REDIRECT_URI` in your `.env` file exactly matches one of the Redirect URIs configured in your Spotify app settings
 
-http://localhost:5000/callback
+**CSS not loading**
+- Verify the CSS path in HTML templates uses: `{{ url_for('static', filename='css/styles.css') }}`
+- Check that `styles.css` exists in `static/css/` directory
 
-Si alguna vez cambiás la URL (por ejemplo otro puerto o dominio), agregala también en Redirect URIs de tu app de Spotify.
+**Authorization issues**
+- Double-check your Client ID and Client Secret in the `.env` file
+- Ensure your Spotify app is not in development mode restrictions
 
-Variables de entorno
-Creá un archivo .env en la raíz del proyecto con:
+## 📝 Important Notes
 
-env
-Copiar
-Editar
-SPOTIFY_CLIENT_ID=tu_client_id
-SPOTIFY_CLIENT_SECRET=tu_client_secret
-REDIRECT_URI=http://127.0.0.1:5000/callback
-No subas .env al repositorio.
+- Spotify's public API doesn't provide exact play counts, only ranking and metadata
+- Session management uses Flask cookies - no database storage
+- The application requires active internet connection to communicate with Spotify's API
 
-Ejecutar
-bash
-Copiar
-Editar
-python app.py
-Abrí en el navegador:
+## 🤝 Contributing
 
-cpp
-Copiar
-Editar
-http://127.0.0.1:5000
-Rutas
-/ — Página de inicio (botón de login).
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-/login — Redirige a Spotify para autorizar.
+## 📜 License
 
-/callback — Recibe el code y guarda el access_token en sesión.
+This project is open source and available under the [MIT License](LICENSE).
 
-/top-artists?time_range=<valor> — Artistas top.
+## 🙋‍♂️ Support
 
-/top-tracks?time_range=<valor> — Canciones top.
+If you encounter any issues or have questions, please [open an issue](https://github.com/ismael123439/spotify-stats/issues) on GitHub.
 
-time_range admite:
+---
 
-short_term — última semana (aprox.)
-
-medium_term — últimos 6 meses (aprox.)
-
-long_term — todo el tiempo (histórico)
-
-Ejemplos:
-
-bash
-Copiar
-Editar
-/top-artists?time_range=short_term
-/top-tracks?time_range=long_term
-Estructura del proyecto
-bash
-Copiar
-Editar
-spotify-stats/
-├─ app.py
-├─ requirements.txt
-├─ .env                  # (no subir)
-├─ README.md
-├─ static/
-│  └─ css/
-│     └─ styles.css
-└─ templates/
-   ├─ index.html
-   ├─ top_artists.html
-   └─ top_tracks.html
-En los HTML, el CSS se incluye así:
-
-html
-Copiar
-Editar
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-Notas
-Los datos de escucha exactos (reproducciones) no están disponibles vía API pública; Spotify devuelve ranking y metadatos, no el conteo de plays.
-
-La sesión se maneja con cookies de Flask; no se guarda nada en base de datos.
-
-Problemas comunes
-redirect_uri_mismatch: la REDIRECT_URI de tu .env debe coincidir exactamente con una de las Redirect URIs configuradas en tu app de Spotify.
-
-CSS no carga: verificá la ruta en el HTML (usar {{ url_for('static', filename='css/styles.css') }}) y que el archivo exista en static/css/styles.css.
-
-makefile
-Copiar
-Editar
+Made with ❤️ and 🎵
