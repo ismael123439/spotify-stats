@@ -1,20 +1,75 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
-    <title>Spotify Login</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotify Stats</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+>
 </head>
 
 <body class="login">
-    <div class="container">
-        <h1>Bienvenido a Spotify Stats</h1>
-        <a href="{{ url_for('login') }}" class="btn">Ir a artistas</a>
+<main class="login-container">
 
-        <!-- Nuevo botón -->
-        <a href="{{ url_for('about') }}" class="btn">Ir a canciones</a>
+    <div class="icon">
+        ♪
     </div>
-</body>
 
-</html>
+    <h1>Spotify Stats</h1>
+
+    <p class="description">
+        Consulta tus estadísticas de escucha de Spotify
+        y descubre qué artistas y canciones escuchas más.
+    </p>
+
+    <div class="menu-buttons">
+
+        <a
+            href="{{ url_for('top_artists') }}"
+            class="menu-btn"
+        >
+            <span class="menu-btn-icon">♩</span>
+
+            <span class="menu-btn-content">
+                <strong>Top artistas</strong>
+                <small>Ver tus artistas más escuchados</small>
+            </span>
+
+            <span class="menu-btn-arrow">→</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('top_tracks') }}"
+            class="menu-btn"
+        >
+            <span class="menu-btn-icon">♪</span>
+
+            <span class="menu-btn-content">
+                <strong>Top canciones</strong>
+                <small>Ver tus canciones más escuchadas</small>
+            </span>
+
+            <span class="menu-btn-arrow">→</span>
+        </a>
+
+    </div>
+
+    <p class="footer-text">
+        Tus datos se consultan directamente desde Spotify.
+    </p>
+
+</main>

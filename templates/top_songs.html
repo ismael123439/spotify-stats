@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Top Artistas</title>
+<title>Top Canciones</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -17,8 +17,9 @@
 
 <link
     rel="stylesheet"
-    href="{{ url_for('static', filename='ta.css') }}"
+    href="{{ url_for('static', filename='ts.css') }}"
 >
+
 <main class="container">
 
     <header class="page-header">
@@ -29,7 +30,7 @@
 
             <div>
                 <p class="eyebrow">ESTADÍSTICAS</p>
-                <h1>Top artistas</h1>
+                <h1>Top canciones</h1>
             </div>
 
         </div>
@@ -54,7 +55,7 @@
 
         <form
             method="get"
-            action="{{ url_for('top_artists') }}"
+            action="{{ url_for('top_tracks') }}"
             class="period-form"
         >
 
@@ -92,18 +93,22 @@
     </section>
 
 
-    {% if artistas %}
+    {% if canciones %}
 
-    <section class="artists-table">
+    <section class="songs-table">
 
-        <div class="table-header">
+        <div class="table-header song-header">
 
             <div class="rank-column">
                 #
             </div>
 
             <div>
-                ARTISTA
+                CANCIÓN
+            </div>
+
+            <div>
+                ÁLBUM
             </div>
 
             <div>
@@ -113,57 +118,70 @@
         </div>
 
 
-        <div class="artists-list">
+        <div class="songs-list">
 
-            {% for artist in artistas %}
+            {% for track in canciones %}
 
-            <div class="artist-row">
+            <div class="song-row">
 
                 <div class="rank">
                     {{ loop.index }}
                 </div>
 
 
-                <div class="artist-info">
+                <div class="song-info">
 
-                    {% if artist.image %}
+                    {% if track.image %}
 
                     <img
-                        src="{{ artist.image }}"
-                        alt="{{ artist.name }}"
-                        class="artist-image"
+                        src="{{ track.image }}"
+                        alt="{{ track.name }}"
+                        class="song-image"
                     >
 
                     {% else %}
 
-                    <div class="artist-image placeholder">
+                    <div class="song-image placeholder">
                         ♪
                     </div>
 
                     {% endif %}
 
 
-                    <a
-                        href="{{ artist.url }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="artist-name"
-                    >
-                        {{ artist.name }}
-                    </a>
+                    <div class="song-details">
 
+                        <a
+                            href="{{ track.url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="song-name"
+                        >
+                            {{ track.name }}
+                        </a>
+
+                        <span class="artist-name">
+                            {{ track.artists }}
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="album-name">
+                    {{ track.album }}
                 </div>
 
 
                 <div class="spotify-link">
 
                     <a
-                        href="{{ artist.url }}"
+                        href="{{ track.url }}"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="open-link"
                     >
-                        Ver artista
+                        Escuchar
                         <span>↗</span>
                     </a>
 
@@ -181,10 +199,10 @@
 
     <div class="empty-state">
 
-        <h2>No se encontraron artistas</h2>
+        <h2>No se encontraron canciones</h2>
 
         <p>
-            No hay información suficiente para mostrar tus artistas.
+            No hay información suficiente para mostrar tus canciones.
         </p>
 
     </div>
@@ -199,12 +217,17 @@
         </a>
 
         <a
-            href="{{ url_for('top_tracks') }}"
+            href="{{ url_for('top_artists') }}"
             class="back-btn"
         >
-            Ver canciones
+            Ver artistas
         </a>
 
     </div>
 
 </main>
+
+
+</body>
+
+</html>

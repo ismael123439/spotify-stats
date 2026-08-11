@@ -108,12 +108,12 @@ def top_tracks():
         for track in data["items"]
     ]
 
-    return render_template("top_tracks.html", canciones=canciones, selected_range=time_range)
+    return render_template("top_songs.html", canciones=canciones, selected_range=time_range)
 
 # 🔹 Nueva ruta para la página "Acerca de"
 @app.route("/about")
 def about():
-    return render_template("top_tracks.html")
+    return render_template("top_songs.html")
 
 
 if __name__ == "__main__":
